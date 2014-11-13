@@ -12,15 +12,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
+import uy.edu.ort.ejemploREST.dominio.Persona;
 
 /**
  * REST Web Service
  *
  * @author alejandrotocar
  */
-@Path("generic")
+@Path("generic/{user}")
 public class GenericResource {
 
     @Context
@@ -59,5 +62,19 @@ public class GenericResource {
     @Path("/saludar")
     public String saludar(){
         return "hola";
+    }
+    
+    @POST
+    @Consumes("application/json")
+    @Path("/saludarPersona")
+    public String saludarPersona(Persona p){
+        return "hola " + p.getNombre() + " " + p.getApellido();
+    }
+    
+    
+    @GET
+    @Path("/saludarPath")
+    public String saludarPersona(@PathParam("user")String p){
+        return "hola " + p;
     }
 }
